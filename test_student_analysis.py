@@ -1,8 +1,8 @@
 import pytest
 import pandas as pd
 import numpy as np
-#from student_analysis import StudentAnalysis
-from solution.student_analysis_solution import StudentAnalysis
+from student_analysis import StudentAnalysis
+#from solution.student_analysis_solution import StudentAnalysis
 
 @pytest.fixture
 def student_analyzer():
