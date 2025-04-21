@@ -88,4 +88,40 @@ class StudentAnalysis:
     - Returns the average (mean) exam score for each unique number of study hours
     """ 
     def score_by_study_hours(self):
-        return self.df.groupby('study_hours_per_day')['exam_score'].mean() 
+        return self.df.groupby('study_hours_per_day')['exam_score'].mean()
+
+    """ Analysis Functions
+    - Returns the count of each unique value in the age column
+    """
+    def get_age_value_counts(self):
+        return self.df['age'].value_counts()
+
+    """ Analysis Functions
+    - Returns the count of each unique value in the study_hours_per_day column
+    """
+    def get_study_hours_value_counts(self):
+        return self.df['study_hours_per_day'].value_counts()
+
+    """ Analysis Functions
+    - Returns the minimum exam score
+    """
+    def get_min_score(self):
+        return self.df['exam_score'].min()
+
+    """ Analysis Functions
+    - Returns the maximum exam score
+    """
+    def get_max_score(self):
+        return self.df['exam_score'].max()
+
+    """ Analysis Functions
+    - Returns the sum of all study hours
+    """
+    def get_total_study_hours(self):
+        return self.df['study_hours_per_day'].sum()
+
+    """ Analysis Functions
+    - Returns the sum of all social media hours
+    """
+    def get_total_social_media_hours(self):
+        return self.df['social_media_hours'].sum()

@@ -1,8 +1,8 @@
 import pytest
 import pandas as pd
 import numpy as np
-from student_analysis import StudentAnalysis
-#from solution.student_analysis_solution import StudentAnalysis
+#from student_analysis import StudentAnalysis
+from solution.student_analysis_solution import StudentAnalysis
 
 @pytest.fixture
 def student_analyzer():
@@ -100,3 +100,45 @@ def test_score_by_study_hours(processed_analyzer):
     assert isinstance(scores_by_hours, pd.Series)
     assert pd.api.types.is_numeric_dtype(scores_by_hours.dtype)
     assert len(scores_by_hours) > 0
+
+def test_age_value_counts(processed_analyzer):
+    """Test getting value counts for age column."""
+    age_counts = processed_analyzer.get_age_value_counts()
+    assert isinstance(age_counts, pd.Series)
+    assert pd.api.types.is_integer_dtype(age_counts.dtype)
+    assert len(age_counts) > 0
+    assert age_counts.sum() == len(processed_analyzer.df)
+
+def test_study_hours_value_counts(processed_analyzer):
+    """Test getting value counts for study hours column."""
+    study_hours_counts = processed_analyzer.get_study_hours_value_counts()
+    assert isinstance(study_hours_counts, pd.Series)
+    assert len(study_hours_counts) > 0
+    assert study_hours_counts.sum() == len(processed_analyzer.df)
+
+def test_min_score(processed_analyzer):
+    """Test getting minimum exam score."""
+    min_score = processed_analyzer.get_min_score()
+    assert isinstance(min_score, (float, np.floating, int, np.integer))
+    assert 0 <= min_score <= 100
+
+def test_max_score(processed_analyzer):
+    """Test getting maximum exam score."""
+    max_score = processed_analyzer.get_max_score()
+    assert isinstance(max_score, (float, np.floating, int, np.integer))
+    assert 0 <= max_score <= 100
+    assert max_score >= processed_analyzer.get_min_score()
+
+def test_total_study_hours(processed_analyzer):
+    """Test getting sum of study hours."""
+    total_hours = processed_analyzer.get_total_study_hours()
+    assert isinstance(total_hours, (float, np.floating, int, np.integer))
+    assert total_hours >= 0
+    assert total_hours == processed_analyzer.df['study_hours_per_day'].sum()
+
+def test_total_social_media_hours(processed_analyzer):
+    """Test getting sum of social media hours."""
+    total_hours = processed_analyzer.get_total_social_media_hours()
+    assert isinstance(total_hours, (float, np.floating, int, np.integer))
+    assert total_hours >= 0
+    assert total_hours == processed_analyzer.df['social_media_hours'].sum()
