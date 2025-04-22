@@ -79,13 +79,13 @@ class StudentAnalysis:
     - Returns the count of each unique value in the age column
     """
     def get_age_value_counts(self):
-        return self.df.groupby('age')['age'].size()
+        return self.df['age'].value_counts()
 
     """ Analysis Functions
     - Returns the count of each unique value in the study_hours_per_day column
     """
     def get_study_hours_value_counts(self):
-        return self.df.groupby('study_hours_per_day')['study_hours_per_day'].size()
+        return self.df['study_hours_per_day'].value_counts()
 
     """ Analysis Functions
     - Returns the minimum exam score
